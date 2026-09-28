@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Café Nube, una cafetería acogedora con café artesanal, postres y desayunos.">
+  <title>Café Nube | Café artesanal & momentos bonitos</title>
+  <style>
+    :root{
+      --cream:#f8f1e7;
+      --cream-2:#fffaf3;
+      --brown:#4a3027;
+      --brown-2:#705044;
+      --rose:#d9a69b;
+      --rose-soft:#edd7d0;
+      --sage:#9ba58e;
+      --gold:#c69b62;
+      --white:#ffffff;
+      --shadow:0 14px 35px rgba(74,48,39,.12);
+      --radius:24px;
+    }
+
+    *{box-sizing:border-box; margin:0; padding:0; scroll-behavior:smooth;}
+    body{
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      color:var(--brown);
+      background:var(--cream);
+      line-height:1.6;
+    }
+    a{text-decoration:none; color:inherit;}
+    img{width:100%; display:block;}
+    .container{width:min(1120px, 90%); margin:auto;}
+
+    /* NAVBAR */
+    header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:rgba(255,250,243,.94);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(74,48,39,.08);
+    }
+    nav{
+      min-height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-family:Georgia, serif;
+      font-size:1.5rem;
+      font-weight:bold;
+      letter-spacing:.5px;
+    }
+    .logo-mark{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:var(--brown);
+      color:var(--cream-2);
+      font-size:1.3rem;
+    }
+    .nav-links{
+      display:flex;
+      list-style:none;
+      gap:28px;
+      font-size:.92rem;
+      font-weight:bold;
+    }
+    .nav-links a{transition:.25s;}
+    .nav-links a:hover{color:var(--rose);}
+    .nav-button{
+      background:var(--brown);
+      color:white;
+      padding:11px 18px;
+      border-radius:999px;
+      transition:.25s;
+    }
+    .nav-button:hover{background:var(--rose); transform:translateY(-2px);}
+
+    /* HERO */
+    .hero{
+      min-height:650px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      align-items:center;
+      gap:55px;
+      padding:70px 0;
+    }
+    .eyebrow{
+      color:var(--brown-2);
+      text-transform:uppercase;
+      letter-spacing:3px;
+      font-size:.78rem;
+      font-weight:bold;
+      margin-bottom:15px;
+    }
+    h1,h2,h3{
+      font-family:Georgia, "Times New Roman", serif;
+      line-height:1.1;
+    }
+    h1{
+      font-size:clamp(3rem,6vw,5.5rem);
+      font-weight:500;
+      margin-bottom:22px;
+    }
+    .hero p{
+      font-size:1.08rem;
+      max-width:520px;
+      color:var(--brown-2);
+      margin-bottom:30px;
+    }
+    .buttons{display:flex; gap:12px; flex-wrap:wrap;}
+    .btn{
+      display:inline-block;
+      padding:14px 24px;
+      border-radius:999px;
+      font-weight:bold;
+      transition:.25s;
+    }
+    .btn-primary{background:var(--brown); color:white;}
+    .btn-primary:hover{transform:translateY(-3px); box-shadow:var(--shadow);}
+    .btn-secondary{border:1px solid var(--brown); background:transparent;}
+    .btn-secondary:hover{background:var(--brown); color:white;}
+
+    .hero-photo{
+      position:relative;
+      height:500px;
+      border-radius:150px 150px 28px 28px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      background:
+        linear-gradient(rgba(60,35,25,.12),rgba(60,35,25,.12)),
+        url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1000&q=85")
+        center/cover;
+    }
+    .floating-note{
+      position:absolute;
+      left:-25px;
+      bottom:30px;
+      background:var(--cream-2);
+      padding:20px;
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      max-width:210px;
+      font-family:Georgia,serif;
+      transform:rotate(-3deg);
+    }
+
+    /* SECTION */
+    section{padding:95px 0;}
+    .section-heading{text-align:center; margin-bottom:45px;}
+    .section-heading h2{font-size:clamp(2.3rem,5vw,3.5rem); font-weight:500;}
+    .section-heading p{max-width:600px; margin:14px auto 0; color:var(--brown-2);}
+
+    /* CATEGORIES */
+    .categories{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+    }
+    .category{
+      background:var(--cream-2);
+      border-radius:var(--radius);
+      padding:28px;
+      text-align:center;
+      box-shadow:0 8px 25px rgba(74,48,39,.07);
+      transition:.25s;
+    }
+    .category:hover{transform:translateY(-7px);}
+    .category-icon{
+      width:70px;height:70px;
+      margin:0 auto 16px;
+      display:grid;place-items:center;
+      background:var(--rose-soft);
+      border-radius:50%;
+      font-size:1.8rem;
+    }
+
+    /* MENU */
+    #menu{background:var(--cream-2);}
+    .menu-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:22px;
+    }
+    .menu-card{
+      background:var(--cream);
+      border:1px solid rgba(74,48,39,.08);
+      padding:25px;
+      border-radius:20px;
+    }
+    .menu-card h3{
+      font-size:1.6rem;
+      margin-bottom:18px;
+    }
+    .menu-item{
+      display:flex;
+      justify-content:space-between;
+      gap:15px;
+      padding:15px 0;
+      border-bottom:1px dashed rgba(74,48,39,.2);
+    }
+    .menu-item:last-child{border-bottom:0;}
+    .item-name{font-weight:bold;}
+    .item-description{font-size:.84rem;color:var(--brown-2);}
+    .price{font-weight:bold; white-space:nowrap; color:var(--brown);}
+
+    /* ABOUT */
+    .about{
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:55px;
+      align-items:center;
+    }
+    .about-image{
+      min-height:480px;
+      border-radius:28px;
+      background:
+        url("https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1000&q=85")
+        center/cover;
+      box-shadow:var(--shadow);
+    }
+    .about h2{font-size:3.2rem; font-weight:500; margin-bottom:20px;}
+    .about p{color:var(--brown-2); margin-bottom:18px;}
+    .quote{
+      border-left:4px solid var(--rose);
+      padding:15px 20px;
+      font-family:Georgia,serif;
+      font-size:1.15rem;
+      background:rgba(237,215,208,.4);
+      border-radius:0 15px 15px 0;
+    }
+
+    /* PROMO */
+    .promo{
+      background:var(--sage);
+      color:white;
+      border-radius:35px;
+      padding:55px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:30px;
+    }
+    .promo h2{font-size:2.7rem; margin-bottom:10px;}
+    .promo p{max-width:650px;}
+    .promo .btn{background:white; color:var(--brown); white-space:nowrap;}
+
+    /* CONTACT */
+    #contact{background:var(--cream-2);}
+    .contact-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:25px;
+    }
+    .contact-card{
+      background:var(--cream);
+      padding:30px;
+      border-radius:var(--radius);
+    }
+    .contact-card h3{font-size:1.7rem; margin-bottom:15px;}
+    .contact-list{list-style:none;}
+    .contact-list li{padding:9px 0;}
+    .map{
+      min-height:300px;
+      border-radius:var(--radius);
+      background:
+        linear-gradient(rgba(74,48,39,.16),rgba(74,48,39,.16)),
+        url("https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1000&q=85")
+        center/cover;
+      display:grid;
+      place-items:center;
+      color:white;
+      font-size:1.3rem;
+      font-weight:bold;
+      text-align:center;
+      padding:30px;
+    }
+
+    /* FOOTER */
+    footer{
+      background:var(--brown);
+      color:var(--cream);
+      padding:45px 0 25px;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr;
+      gap:35px;
+      padding-bottom:30px;
+    }
+    footer h3{font-size:1.5rem; margin-bottom:12px;}
+    footer p, footer li{color:#eadfd5; font-size:.92rem;}
+    footer ul{list-style:none;}
+    footer li{margin:7px 0;}
+    .copyright{
+      padding-top:20px;
+      border-top:1px solid rgba(255,255,255,.15);
+      text-align:center;
+      font-size:.8rem;
+      color:#d7c9bf;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:800px){
+      .nav-links{display:none;}
+      .hero,.about,.contact-grid{grid-template-columns:1fr;}
+      .hero{padding:55px 0;}
+      .hero-photo{height:420px; order:-1;}
+      .categories,.menu-grid{grid-template-columns:1fr;}
+      .promo{padding:35px; flex-direction:column; align-items:flex-start;}
+      .footer-grid{grid-template-columns:1fr;}
+      section{padding:70px 0;}
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <nav class="container">
+    <a class="logo" href="#inicio">
+      <span class="logo-mark">☕</span>
+      Café Nube
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#menu">Menú</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#promociones">Promociones</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+
+    <a class="nav-button" href="#menu">Ver menú</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero container" id="inicio">
+    <div>
+      <div class="eyebrow">Café artesanal · CDMX</div>
+      <h1>Tu momento,<br><em>tu café.</em></h1>
+      <p>
+        Un pequeño rincón para disfrutar café recién preparado,
+        desayunos ricos y postres hechos con cariño.
+      </p>
+      <div class="buttons">
+        <a class="btn btn-primary" href="#menu">Explorar menú</a>
+        <a class="btn btn-secondary" href="#contacto">Visítanos</a>
+      </div>
+    </div>
+
+    <div class="hero-photo">
+      <div class="floating-note">
+        “Hecho despacio.<br>Disfrutado sin prisa.”
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-heading">
+        <div class="eyebrow">Lo que encontrarás</div>
+        <h2>Pequeños placeres</h2>
+        <p>Todo lo que necesitas para hacer especial una tarde cualquiera.</p>
+      </div>
+
+      <div class="categories">
+        <article class="category">
+          <div class="category-icon">☕</div>
+          <h3>Café artesanal</h3>
+          <p>Granos seleccionados y bebidas preparadas al momento.</p>
+        </article>
+
+        <article class="category">
+          <div class="category-icon">🍰</div>
+          <h3>Postres</h3>
+          <p>Opciones dulces para acompañar tu bebida favorita.</p>
+        </article>
+
+        <article class="category">
+          <div class="category-icon">🥐</div>
+          <h3>Desayunos</h3>
+          <p>Comida sencilla, rica y perfecta para comenzar el día.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu">
+    <div class="container">
+      <div class="section-heading">
+        <div class="eyebrow">Carta de Café Nube</div>
+        <h2>Nuestro menú</h2>
+        <p>Una selección de favoritos preparados especialmente para ti.</p>
+      </div>
+
+      <div class="menu-grid">
+
+        <article class="menu-card">
+          <h3>☕ Cafés</h3>
+
+          <div class="menu-item">
+            <div>
+              <div class="item-name">Americano</div>
+              <div class="item-description">Espresso y agua caliente.</div>
+            </div>
+            <div class="price">$45</div>
+          </div>
+
+          <div class="menu-item">
+            <div>
+              <div class="item-name">Cappuccino</div>
+              <div class="item-description">Espresso, leche y espuma.</div>
+            </div>
+            <div class="price">$55</div>
+          </div>
+
+          <div class="menu-item">
+            <div>
+              <div class="item-name">Latte de vainilla</div>
+              <div class="item-description">Suave, cremoso y aromático.</div>
+            </div>
+            <div class="price">$58</div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <h3>🧊 Bebidas frías</h3>
+
+          <div class="menu-item">
+            <div>
+              <div class="item-name">Cold Brew</div>
+              <div class="item-description">Café frío de extracción lenta.</div>
+            </div>
+            <div class="price">$60</div>
+          </div>
+
+          <div class="menu-item">
+            <div>
+              <div class="item-name">Frappé de café</div>
+              <div class="item-description">Cremoso y refrescante.</div>
+            </div>
+            <div class="price">$65</div>
+          </div>
+
+          <div class="menu-item">
+            <div>
+              <div class="item-name">Matcha latte</div>
+              <div class="item-description">Matcha con leche cremosa.</div>
+            </div>
+            <div class="price">$62</div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <h3>🍰 Postres</h3>
+
+          <div class="menu-item">
+            <div>
+              <div class="item-name">Cheesecake</div>
+              <div class="item-description">Rebanada del día.</div>
+            </div>
+            <div class="price">$68</div>
+          </div>
+
+          <div class="menu-item">
+            <div>
+              <div class="item-name">Galleta de chocolate</div>
+              <div class="item-description">Horneada en casa.</div>
+            </div>
+            <div class="price">$38</div>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <h3>🥐 Desayunos</h3>
+
+          <div class="menu-item">
+            <div>
+              <div class="item-name">Croissant & café</div>
+              <div class="item-description">Croissant de mantequilla.</div>
+            </div>
+            <div class="price">$85</div>
+          </div>
+
+          <div class="menu-item">
+            <div>
+              <div class="item-name">Toast de aguacate</div>
+              <div class="item-description">Pan artesanal, aguacate y semillas.</div>
+            </div>
+            <div class="price">$95</div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="nosotros">
+    <div class="container about">
+      <div class="about-image" aria-label="Interior acogedor de una cafetería"></div>
+
+      <div>
+        <div class="eyebrow">Nuestra historia</div>
+        <h2>Un lugar para bajar el ritmo.</h2>
+        <p>
+          Café Nube nació de una idea sencilla: crear un espacio donde
+          una buena taza de café pudiera convertirse en un momento especial.
+        </p>
+        <p>
+          Cuidamos cada detalle, desde nuestros granos hasta la música
+          y el ambiente, para que puedas estudiar, platicar o simplemente
+          disfrutar un momento para ti.
+        </p>
+        <div class="quote">
+          Café rico, ambiente bonito y cero prisas.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="promociones">
+    <div class="container">
+      <div class="promo">
+        <div>
+          <div class="eyebrow" style="color:#fff;">Promo de la semana</div>
+          <h2>Martes de café + postre</h2>
+          <p>Disfruta cualquier café de nuestra carta acompañado de una galleta del día.</p>
+        </div>
+        <a class="btn" href="#contacto">Quiero visitarte</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="container">
+      <div class="section-heading">
+        <div class="eyebrow">Encuéntranos</div>
+        <h2>Nos encantará verte</h2>
+        <p>Ven por un café, quédate por el ambiente.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>Información</h3>
+          <ul class="contact-list">
+            <li>📍 Av. Café 123, CDMX</li>
+            <li>🕐 Lunes a viernes: 8:00–20:00</li>
+            <li>🕐 Sábado y domingo: 9:00–21:00</li>
+            <li>☎️ 55 0000 0000</li>
+            <li>📷 Instagram: @cafenube</li>
+          </ul>
+        </div>
+
+        <div class="map">
+          <div>
+            📍<br>
+            Café Nube<br>
+            <small>Av. Café 123 · Ciudad de México</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h3>Café Nube ☕</h3>
+        <p>Un pequeño espacio para disfrutar café, comida y buenos momentos.</p>
+      </div>
+
+      <div>
+        <h3>Explora</h3>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#menu">Menú</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Contacto</h3>
+        <ul>
+          <li>Instagram: @cafenube</li>
+          <li>Tel. 55 0000 0000</li>
+          <li>CDMX, México</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="copyright">
+      © 2026 Café Nube · Proyecto escolar de diseño web
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
